@@ -1,0 +1,44 @@
+org: implementing
+service: lambda-dynamodb
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-west-2
+  tags:
+    Name: lambda-dynamodb
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+      Resource: "arn:aws:dynamodb:${aws:region}:${aws:accountId}:table/UsersTable"
+
+plugins:
+  - serverless-offline
+
+resources:
+  Resources:
+    DynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: UsersTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+
+functions:
+  app:
+    handler: lambda.handler
+    events:
+      - httpApi:
+          path: /{proxy+}
+          method: ANY
+
+custom:
+  serverless-offline:
+    reloadHandler: true
