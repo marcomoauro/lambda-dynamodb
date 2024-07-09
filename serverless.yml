@@ -24,6 +24,9 @@ resources:
       Properties:
         TableName: UsersTable
         BillingMode: PAY_PER_REQUEST
+        Tags:
+          - Key: Name
+            Value: lambda-dynamodb
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
