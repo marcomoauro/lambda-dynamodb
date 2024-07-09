@@ -1,6 +1,6 @@
-# Deploy Koa.js server on a Lambda function using Serverless Framework
+# Deploy AWS DynamoDB Table using Serverless Framework
 
-Backend template to deploy Koa.js server on a Lambda functions with Node.js and Serverless Framework.
+Deploy AWS DynamoDB Table and Lambda functions using Serverless Framework and Node.js.
 
 ## Requirements
 
